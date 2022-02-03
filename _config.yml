@@ -1,0 +1,8 @@
+title: tyskdm
+description: Where's tagline?
+google_analytics: UA-21872758-4
+show_downloads: true
+theme: jekyll-theme-minimal
+
+gems:
+  - jekyll-mentions
