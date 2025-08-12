@@ -1,0 +1,56 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.194.0/containers/docker-existing-dockerfile
+{
+	"name": "gdoc-Python3.10",
+	// Sets the run context to one level up instead of the .devcontainer folder.
+	"context": "..",
+	// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+	"dockerFile": "Dockerfile",
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Uncomment the next line to run commands after the container is created - for example installing curl.
+	// "postCreateCommand": "apt-get update && apt-get install -y curl",
+	"postCreateCommand": ".devcontainer/postCreateCommand",
+	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
+	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+	"containerEnv": {
+		"DISPLAY": "${localEnv:DISPLAY}"
+	},
+	"runArgs": [
+		"-v",
+		"/tmp/.X11-unix/:/tmp/.X11-unix"
+	],
+	// And exec `xhost +local:` in host terminal, before using display.
+	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
+	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
+	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode"
+	"customizations": {
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": {},
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"eamodio.gitlens",
+				"GitHub.copilot",
+				"github.copilot-chat",
+				"yzhang.markdown-all-in-one",
+				"davidanson.vscode-markdownlint",
+				"bierner.markdown-preview-github-styles",
+				"foam.foam-vscode",
+				// "shd101wyy.markdown-preview-enhanced",
+				// Python extensions
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-python.isort",
+				"ms-python.flake8",
+				"ms-python.black-formatter",
+				"njpwerner.autodocstring",
+				"ryanluker.vscode-coverage-gutters"
+			]
+		}
+	},
+	"mounts": [
+		"source=/home/tsuyoshi/OneDrive/workspace/gdoc/.tmp/,target=/workspaces/gdoc.tmp,type=bind"
+	]
+}
