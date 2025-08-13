@@ -1,0 +1,30 @@
+name: update content submodule
+on:
+  repository_dispatch:
+    types: [content-updated]
+
+jobs:
+  update-submodule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.PAGES_SITE_TOKEN }}
+
+      - name: update submodule
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+          git submodule update --remote --recursive 
+          git add .
+
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No changes detected in submodule."
+            exit 0
+          fi
+
+          git commit -m "🔄 Update content submodule"
+          git push
